@@ -1,0 +1,451 @@
+/* -------------------------------------------GLOBAL STYLES-----------------------------------------------
+-------------------------------------------------------------------------------------------------------------*/
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
+li{
+    list-style-type: none;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+  
+
+
+/* -------------------------------------------HEADER STYLES-----------------------------------------------
+-------------------------------------------------------------------------------------------------------------*/
+.headerDiv{
+    background-color: white;
+    color: black;
+    height: 80px;
+    width: 100%;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+}
+
+.headerLogoImg{
+    margin: auto;
+    margin-left: 80px;
+    height: 86px;
+    width: 86px;
+}
+
+.headerLogo{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.headerTitle{
+    margin: auto;
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.headerLanguage{
+    display: flex;
+    margin: auto;
+    margin-right: 80px;
+    justify-content: flex-end;
+    font-size: 17px;
+}
+
+.headerIcon{
+    margin-right: 7px;
+}
+
+
+
+
+/* -------------------------------------------LOGIN STYLES-----------------------------------------------
+-------------------------------------------------------------------------------------------------------------*/
+.container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  font-family: "Raleway", sans-serif;
+}
+.container:hover .top:before, 
+.container:hover .top:after, 
+.container:hover .bottom:before, 
+.container:hover .bottom:after, 
+.container:active .top:before, 
+.container:active .top:after, 
+.container:active .bottom:before, 
+.container:active .bottom:after {
+  margin-left: 200px;
+  transform-origin: -200px 50%;
+  transition-delay: 0s;
+}
+.container:hover .center, .container:active .center {
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.top:before, .top:after, .bottom:before, .bottom:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 200vmax;
+  height: 200vmax;
+  top: 50%;
+  left: 50%;
+  margin-top: -100vmax;
+  transform-origin: 0 50%;
+  transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+  z-index: 10;
+  opacity: 0.65;
+  transition-delay: 0.2s;
+}
+
+.top:before {
+  transform: rotate(45deg);
+  background-color: #252525;
+}
+.top:after {
+  transform: rotate(135deg);
+  background-color: crimson;
+}
+
+.bottom:before {
+  transform: rotate(-45deg);
+  background-color: crimson;
+}
+.bottom:after {
+  transform: rotate(-135deg);
+  background-color: #252525;
+}
+
+.center {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  margin-left: -200px;
+  margin-top: -200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+  transition-delay: 0s;
+  color: #333;
+}
+.center input {
+  width: 100%;
+  padding: 15px;
+  margin: 5px;
+  border-radius: 1px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+}
+
+.login-input{
+    border: solid 1px black;
+    border-radius: 2%;
+    font-size: 15px;
+    padding: 12px 10px;
+    margin: 10px 0;
+}
+
+.login-input::placeholder{
+    font-size: 15px;
+    padding: 10px 8px;
+    font-weight: 400;
+}
+
+.login-input:focus::placeholder{
+    color: transparent;
+    padding: 4px 6px;
+    font-size: 20px;
+}
+
+.login-input[type="password"]{
+    font-weight: 1000;
+}
+
+#login-account{
+    background-color: #008080;
+    color: white;
+    height: 40px;
+    width: 100%;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius: 3%;
+    cursor: pointer;
+}
+
+#login-account:hover{
+    background-color: white;
+    border: solid 2px #008080;
+    color: #008080;
+}
+
+#forget-password{
+    margin-top: 15px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 400;
+    border-bottom: 1px solid black;
+    width: max-content;
+    cursor: pointer;
+}
+
+
+
+/* -------------------------------------------FOOTER STYLES-----------------------------------------------
+-------------------------------------------------------------------------------------------------------------*/
+.footer{
+    display: flex;
+    flex-direction: row;
+    height: 30vh;
+}
+
+.footer-div{
+    flex: 1;
+    padding: 5px;
+    margin: 15px;
+}
+
+.footer-heading{
+    font-size: 20px;
+}
+
+.site-heading{
+    font-size: 30px;
+}
+
+.footer-desc{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.footer-social-icons{
+    font-size: 30px;
+    margin-right: 15px;
+}
+
+.footer-links{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-top: 15px;
+}
+
+.footer-links-ul{
+    margin-right: 50px;
+}
+
+.footer-links-list{
+    padding-top: 10px;
+}
+
+.footer-contact-icons{
+    font-size: 21px;
+    margin-top: 17px;
+}
+
+ul p{
+    display: inline;
+}
+
+
+
+/*-------------------------------------------------- PROFILE HEADER -----------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------*/
+.profile-header{
+    width: 100%;
+    height: 80px;
+    background-color: #f5fcff;
+    display: flex;
+}
+
+.profile-header-image{
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    background-color: #add8e6;
+    align-self: center;
+    display: flex;
+    margin-left: 30px;
+    justify-content: center;
+}
+
+.profile-header-image img{
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-header-stat{
+    align-self: center;
+    flex: 1;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.profile-header-stat div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-header-stat div p:nth-child(1){
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.profile-header-stat div p:nth-child(2){
+    font-weight: 500;
+}
+
+.profile-header-feature{
+    flex: 0.5;
+    display: flex;
+    align-self: center;
+    justify-content: space-evenly;
+    font-size: 23px;
+}
+
+#notify, #logout, #profile{
+    cursor: pointer;
+}
+
+
+
+/*-------------------------------------------------- FEED -----------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------*/
+.feed{
+    width: 50%;
+    display: flex;
+    align-self: center;
+}
+
+.feedWrapper{
+    padding: 20px;
+    width: 100%;
+}
+
+
+/*-------------------------------------------------- POSTS -----------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------*/
+.post {
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    margin: 30px 0;
+  }
+  
+.postWrapper {
+    padding: 10px;
+}
+
+  .postTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .postTopLeft {
+    display: flex;
+    align-items: center;
+  }
+  
+  .postProfileImg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .postTopLeftText{
+      display: flex;
+      flex-direction: column;
+      margin-left: 12px;
+  }
+  
+  .postUsername {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0 10px;
+  }
+  
+  .postDate{
+      font-size: 12px;
+  }
+  
+  .postCenter{
+      margin: 20px 0;
+  }
+  
+  .postImg{
+      margin-top: 20px;
+      width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+  }
+
+  .text{
+    display: inline;
+    width: 100%;
+  }
+    
+  .read-or-hide{
+    color: rgb(192,192,192);
+    cursor: pointer;
+  }
+
+
+
+
+/* -------------------------------------------RESPONSIVE STYLES-----------------------------------------------
+-------------------------------------------------------------------------------------------------------------*/
+
+@media only screen and (max-width:600px){
+    .headerLanguage{
+        display: none;
+    }
+
+    .headerLogoImg{
+        margin-left: 30px;
+    }
+
+    .profile-header-stat{
+        display: none;
+    }
+} 
+
+
+@media only screen and (max-width:370px){
+    .headerTitle{
+        font-size: 25px;
+    }
+
+    .headerLogoImg{
+        height: 60px;
+        width: 60px;
+    }
+
+    .headerLogoImg{
+        margin-left: 15px;
+    }
+}
+
+@media only screen and (max-width:250px){
+    .headerTitle{
+        display: none;
+    }
+
+    .headerLogoImg{
+        margin: auto;
+    }
+}
+

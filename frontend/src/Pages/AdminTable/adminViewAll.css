@@ -1,0 +1,64 @@
+.table-wrap{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    background-color: whitesmoke;
+}
+
+.adminTableDiv{
+  width: 70%;
+}
+
+.admin-remove-icon{
+  margin: 0 40px 0  0;
+  cursor: pointer;
+}
+
+.admin-update-icon{
+  cursor: pointer;
+}
+
+.adminTable {
+  border-collapse: collapse;
+  border: none;
+  width: 100%;
+  border-radius: 0%;
+}
+
+.adminTableRowHeader {
+  background-color: transparent;
+  transition: all 0.25s ease;
+}
+
+.adminTableHeader {
+  background-color: #f1f1f1;
+  padding: 20px 7px;
+  font-weight: 600;
+  text-align: left;
+  font-size: 18px;
+  color: #2c3e50;
+}
+
+.adminTableRowItems {
+  cursor: auto;
+}
+
+.adminTableRowItems:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.adminTableCell {
+  padding: 12px 7px;
+  font-size: 16px;
+  color: grey;
+}
+
+.visitButton{
+  border-radius: 0%;
+  color: blue;
+  background-color: transparent;
+}

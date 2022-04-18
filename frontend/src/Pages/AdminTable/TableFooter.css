@@ -1,0 +1,31 @@
+.adminTableFooter {
+    background-color: #f1f1f1;
+    padding: 8px 0px;
+    width: 100%;
+    font-weight: 500;
+    text-align: left;
+    font-size: 16px;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .adminFooterButton {
+    border: none;
+    padding: 8px 4px;
+    cursor: pointer;
+    margin-right: 4px;
+    margin-left: 4px;
+    width: 40px;
+  }
+  
+  .adminFooterActiveButton {
+    color: white;
+    background: #185adb;
+  }
+  
+  .adminFooterInactiveButton {
+    color: #2c3e50;
+    background: #f9f9f9;
+  }
