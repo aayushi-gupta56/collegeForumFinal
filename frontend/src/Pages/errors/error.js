@@ -1,6 +1,5 @@
 import React from 'react'
 import './error.css'
-import { MdOutlineLeaderboard } from 'react-icons/md'
 
 const Error = ()=>{
 

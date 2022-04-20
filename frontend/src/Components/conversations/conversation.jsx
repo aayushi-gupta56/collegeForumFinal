@@ -1,13 +1,57 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { PF } from "../../Pages/publicFolder";
 import './conversation.css'
 
-const Conversation=()=>{
+const Conversation=({conversation, currentUser})=>{
+    const [user, setUser] = useState(null);
+
+    useEffect(()=>{
+
+        const friendID = (conversation.memId_1 === currentUser.userID)? conversation.memId_2 : conversation.memId_1
+        axios.get(`http://localhost:5000/api/user/find/${friendID}`,{
+            headers : {
+                "token" : `Bearer ${sessionStorage.getItem("token")}`
+            }
+        }).then(res=>{
+            if(res.data.isClub===1){
+                
+                axios.get(`http://localhost:5000/api/clubs/profile/${friendID}`,{
+                    headers : {
+                        "token" : `Bearer ${sessionStorage.getItem("token")}`
+                    }
+                }).then(result=>{
+                    setUser(result.data);
+                }).catch(err=>{
+                    console.log(err);
+                })
+
+            }else{
+
+                axios.get(`http://localhost:5000/api/stud/profile/${friendID}`,{
+                    headers : {
+                        "token" : `Bearer ${sessionStorage.getItem("token")}`
+                    }
+                }).then(result=>{
+                    setUser(result.data);
+                }).catch(err=>{
+                    console.log(err);
+                })
+
+            }
+        }).catch(err=>{
+            console.log(err);
+        })
+
+
+    }, [currentUser, conversation])
+
     return(
         <div className="conversation">
                 <img className="conversationImg" 
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" 
+                    src={user?.profile? user.profile : `${PF}unknown.png`}
                     alt="" />
-            <span className="conversationName">John Doe</span> 
+            <span className="conversationName">{user?.name}</span> 
         </div>
     )
 }

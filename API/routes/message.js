@@ -27,7 +27,14 @@ router.post("/", async (req, res) => {
             resolve(result);
     }))
 
-    return res.status(200).json("MESSAGE SENT SUCCESSFULLY..")
+    const newAdd = await new Promise((resolve,reject)=>con.query(`SELECT * FROM messages WHERE mid=?`,[mid], (err, result)=>{
+      if(err)
+        reject(err)
+      else
+        resolve(result)
+    }))
+
+    return res.status(200).json(newAdd[0]);
 
 
 

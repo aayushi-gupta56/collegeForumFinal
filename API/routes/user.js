@@ -80,7 +80,7 @@ route.delete('/:id',verifyTokenAndAuth, async (req, res)=>{
 
 
 //GET USER
-route.get('/find/:id', verifyTokenAndAdmin, async (req, res)=>{
+route.get('/find/:id', verifyToken, async (req, res)=>{
     try{
 
         const stmt = `SELECT * FROM users WHERE userID='${req.params.id}'`

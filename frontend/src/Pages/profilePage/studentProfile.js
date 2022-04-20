@@ -24,7 +24,7 @@ const ProfilePage = ({current})=>{
 
     //METHOD TO HANDLE CANCEL CHANGES
     const handleClose = ()=>{
-        if(current.isAdmin==1)
+        if(current.isAdmin===1)
             window.location = '/admin/find'
         else
             window.location = `/student/${urID}`

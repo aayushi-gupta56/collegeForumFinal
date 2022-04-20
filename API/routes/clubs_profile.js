@@ -1,6 +1,6 @@
 const connection = require('../dbConnection');
 const route  = require('express').Router();
-const {verifyTokenAndAuth} = require('./verifyToken');
+const {verifyTokenAndAuth, verifyToken} = require('./verifyToken');
 
 
 //UPDATE PROFILE
@@ -45,7 +45,7 @@ route.put('/profile/:id', verifyTokenAndAuth, async(req, res)=>{
 
 //GET PROFILE
 
-route.get('/profile/:id', verifyTokenAndAuth, async(req, res)=>{
+route.get('/profile/:id', verifyToken, async(req, res)=>{
     const id = req.params.id;
     try{
 

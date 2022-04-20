@@ -1,10 +1,7 @@
-import React, {useRef} from "react";
+import React from "react";
 import styled from 'styled-components';
 import Input from './input';
 import Button from './button'
-import Radio from "./radio";
-import RadioLabel from "./radioLabel";
-import FileInput from './fileInput'
 
 
 const MainContainer = styled.div`

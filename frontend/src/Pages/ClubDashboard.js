@@ -16,6 +16,10 @@ const ClubDashboard = ()=>{
         window.location = '/calendar'
     }
 
+    const handleChat = ()=>{
+        window.location = '/messenger'
+    }
+
     return(
         <div>
             <Header />
@@ -36,7 +40,7 @@ const ClubDashboard = ()=>{
                         </div>
                         <p>CALENDAR</p>
                     </div>
-                    <div className="dashboard-posts">
+                    <div className="dashboard-posts" onClick={handleChat}>
                         <img src={`${PF}board-pin.png`} className="board-pin" alt=""></img>
                         <div id="dashboard-chat" className="dashboard-images">
                             <img src={`${PF}dashboard-chat.png`} alt="CHAT"></img>   

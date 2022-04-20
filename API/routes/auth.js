@@ -86,7 +86,7 @@ route.post('/login', async(req, res)=>{
                 isAdmin: user[0].isAdmin,
                 isClub: user[0].isClub
             }, process.env.JWT_SEC_KEY,
-            {expiresIn:"1h"});
+            {expiresIn:'24h'});
 
             const {password, ...others} = user[0];
             res.status(200).json({...others, AccessToken});

@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React from "react"
 import Feed from "../Components/feed"
 import Header from "../Components/header"
 import './Pages.css';
@@ -41,7 +41,7 @@ const Timeline = ({curUser})=>{
                     <img src={`${PF}unknown.png`}alt="Profile" className="profile-image"></img>
                 </div>
             </div>
-            <button className="timeline-create-post" onClick={handleCreate}>Create a post</button>
+            <button className="timeline-create-post" onClick={handleCreate}>What's on your mind?</button>
             <Feed />
         </div>
     )

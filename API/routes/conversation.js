@@ -63,7 +63,7 @@ router.get("/find/:firstUserId/:secondUserId", async (req, res) => {
                         resolve(result);
         }))
 
-        res.status(200).json(ans[0]);
+        res.status(200).json(ans);
 
 
    } catch (err) {

@@ -97,10 +97,11 @@ function App() {
             element={<Calendar/>}/>
 
           {/*-----------------------ROUTE TO CREATE POST PAGE-----------------------------*/}
-          <Route path='/messenger' element={<Messenger/>}></Route>
+          <Route path='/messenger' element={<Messenger current={payload}/>}></Route>
 
           {/*-----------------------ROUTE TO SEARCH POST PAGE-----------------------------*/}
           <Route path='/search/posts' element={<SearchPosts/>}/>
+
 
           </Routes>
     </Router>

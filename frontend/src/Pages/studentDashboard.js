@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import './Pages.css';
 import Header from '../Components/header';
 import ProfileHeader from "../Components/ProfileHeader";
@@ -18,6 +18,10 @@ const StudentDashboard = ()=>{
 
     const handleSearchPosts = ()=>{
         window.location = '/search/posts'
+    }
+
+    const handleChat = ()=>{
+        window.location = '/messenger'
     }
 
     return(
@@ -40,7 +44,7 @@ const StudentDashboard = ()=>{
                     </div>
                     <p>CALENDAR</p>
                 </div>
-                <div className="dashboard-posts">
+                <div className="dashboard-posts" onClick={handleChat}>
                     <img src={PF+"/board-pin.png"} className="board-pin" alt=""></img>
                     <div id="dashboard-chat" className="dashboard-images">
                         <img src={PF+"/dashboard-chat.png"} alt="CHAT"></img>   
