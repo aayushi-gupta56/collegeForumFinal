@@ -78,7 +78,7 @@ const AdminViewAll = ()=>{
     
       return (
           <div className="table-wrap">
-              <button className='home-btn' onClick={handleHome}>HOME</button>
+              <button className='home-btn adminTableBtn' onClick={handleHome}>DASHBOARD</button>
                 <div className="adminTableDiv">
                     <table className="adminTable">
                         <thead className="adminTableRowHeader">
@@ -99,8 +99,10 @@ const AdminViewAll = ()=>{
                                     <td className="adminTableCell">{el.email}</td>
                                     <td className="adminTableCell">{el.isClub}</td>
                                     <td className="adminTableCell">{el.isAdmin}</td>
-                                    <td><MdPersonRemoveAlt1 className="admin-remove-icon" onClick={()=>{handleRemove(el.userID)}}/>
-                                        <GrUpdate className="admin-update-icon" onClick={()=>handleUpdate(el.userID)}/></td>
+                                    <td className="adminTableCell">{el.isAdmin? "N/A :(" : <div>
+                                            <MdPersonRemoveAlt1 className="admin-remove-icon" onClick={()=>{handleRemove(el.userID)}}/>
+                                            <GrUpdate className="admin-update-icon" onClick={()=>handleUpdate(el.userID)}/>
+                                        </div>}</td>
                                     <td className="adminTableCell">{el.isAdmin? "N/A :(" :<button className="visitButton" onClick={()=>{handleProfileVisit(el)}}>VISIT</button>}</td>
                                     <td className="adminTableCell">{el.isAdmin? "N/A :(" :<button className="visitButton">VISIT</button>}</td>
                                 </tr>

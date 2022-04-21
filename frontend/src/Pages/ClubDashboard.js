@@ -7,6 +7,10 @@ import {PF} from "./publicFolder"
 
 const ClubDashboard = ()=>{
 
+    const handleMem = ()=>{
+        window.location = window.location.pathname + '/members'
+    }
+
     const handleFeed = ()=>{
         const path = window.location.pathname.split('/')
         window.location = `/feed/${path[path.length-1]}`
@@ -26,10 +30,10 @@ const ClubDashboard = ()=>{
             <ProfileHeader type="club"/>
             <div className='club-dashboard'>
                 <div className='dashboard-all'>
-                    <div className="dashboard-posts">
+                    <div className="dashboard-posts" onClick={handleMem}>
                         <img src={`${PF}board-pin.png`} className="board-pin" alt=""></img>
                         <div id="dashboard-timeline" className="dashboard-images">
-                            <img src={`${PF}clubMem.png`} alt="FEED"></img>
+                            <img src={`${PF}clubMem.png`} alt="MEMBERS"></img>
                         </div>
                         <p>MEMBERS</p>
                     </div>
@@ -47,7 +51,7 @@ const ClubDashboard = ()=>{
                         </div>
                         <p>CHAT</p>
                     </div>
-                    <div className="dashboard-posts" onClick={handleFeed}>
+                    <div className="dashboard-posts" id="feedGrid" onClick={handleFeed}>
                     <img src={PF+"board-pin.png"} className="board-pin" alt=""></img>
                     <div id="dashboard-timeline" className="dashboard-images">
                         <img src={PF+"dashboard-feed.png"} alt="FEED"></img>

@@ -1,0 +1,149 @@
+@import url("https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap");
+
+.RegisterContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #dfdfdf;
+  font-size: 18px;
+}
+
+.RegisterForm {
+  width: 400px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.RegisterForm div, .RegisterForm label, .RegisterForm .textInput{
+  width: 100%;
+  outline: none;
+}
+
+.checkboxInput{
+    width: 20px;
+    height: 20px;
+    display: block;
+    margin-left: 20px;
+}
+
+.Registerfield{
+  margin: 16px 0;
+}
+
+.RegisterFieldCheckbox{
+    margin-top: 16px;
+    display: flex;
+    flex-direction: row;
+}
+
+.RegisterForm label, .RegisterForm input{
+  padding: 8px;
+  transition: all 0.5s ease;
+}
+
+.RegisterForm label, [placeholder] {
+  color: #555;
+}
+
+.RegisterIcons {
+  margin: 0 10px 0 0;
+}
+
+.Registerfield:focus-within label {
+  color: #000;
+  letter-spacing: 2px;
+}
+
+.RegisterFieldCheckboxPart{
+    width: 50%;
+}
+
+.RegisterFieldCheckboxPart:focus-within label{
+    color: #000;
+    letter-spacing: 2px;    
+}
+
+.RegisterForm .textInput{
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  box-shadow: 0 8px 6px -6px #555;
+}
+
+.RegisterForm input:focus{
+  background: white;
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
+.errorText{
+    color: red;
+    font-size: 14px;
+    margin-top: 7px;
+    text-transform: uppercase;
+}
+
+.addUserBtn {
+  background: #2f4ad0;
+  width: max-content;
+  margin: 16px 0 50px 0;
+  padding: 8px 16px;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 8px 6px -6px #555;
+  transition: all 0.5s ease;
+}
+
+.addUserBtn:hover {
+  letter-spacing: 2px;
+  box-shadow: none;
+}
+
+.inputPassword{
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.inputPassword::placeholder{
+  font-weight: 200;
+  font-size: 15px;
+}
+
+.passwordTooltip{
+  visibility: hidden;
+  max-height: 0;
+  height: 0;
+  position: absolute;
+  top: -80px;
+  left: 420px;
+}
+
+.passwordTooltip div{
+  background-color: #b8b8b8;
+  border-radius: 20px;
+  padding: 7px 10px;
+  width: 280px;
+  font-size: 15px;
+  text-transform: lowercase;
+  font-weight: 500;
+}
+
+.passwordRegisterField:hover .passwordTooltip{
+  visibility: visible;
+  position: relative;
+}
+
+.addNewButtons{
+  display: flex;
+  justify-content: space-evenly;
+}

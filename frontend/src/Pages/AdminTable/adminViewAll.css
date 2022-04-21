@@ -62,3 +62,7 @@
   color: blue;
   background-color: transparent;
 }
+
+.adminTableBtn{
+  width: max-content;
+}

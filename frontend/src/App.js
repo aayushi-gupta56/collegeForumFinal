@@ -18,6 +18,8 @@ import {
   Route,
   Navigate
 } from "react-router-dom";
+import AdminAddUser from './Pages/AdminAddUser/adminAddUser';
+import MemberPage from './Pages/memberPage/membersPage';
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -40,6 +42,12 @@ function App() {
                                         payload.isAdmin===1 ? <AdminDashboard/>:
                                                               <Navigate to='/error' replace/>}/>
 
+          {/*-----------------------ROUTE TO REGISTER PAGE-----------------------------*/}
+          <Route path="/register"
+            element={payload === null ? <Navigate to="/" replace/> :
+                                        payload.isAdmin===1 ? <AdminAddUser current={payload.userID}/>:
+                                                              <Navigate to='/error' replace/>}/>
+
 
           {/*-----------------------ROUTE TO STUDENT DASHBOARD-----------------------------*/}
           <Route path="/student/:id" 
@@ -54,6 +62,11 @@ function App() {
                                         payload.isClub === 1 ? <ClubDashboard/>:
                                         payload.isAdmin === 1? <ClubDashboard/>:
                                                                <Navigate to='/error' replace/>}/> 
+
+          {/*-----------------------ROUTE TO CLUB MEMBERS PAGE-----------------------------*/}
+          <Route path='/club/:id/members'
+            element={payload === null ? <Navigate to="/" replace /> :
+                                        <MemberPage current={payload}/>}/>
 
 
           {/*-----------------------ROUTE TO TIMELINE-----------------------------*/}

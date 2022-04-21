@@ -10,10 +10,10 @@ const Header = ()=>{
                 <img src={`${PF}CFLogo.png`} alt="Logo" className="headerLogo"></img>
             </div>
             <p className="headerTitle">College Forum.</p>
-            <p className="headerLanguage">
+            <div className="headerLanguage">
                 <BsGlobe className="headerIcon"/> 
                 <h4>English</h4>
-            </p>
+            </div>
         </div>
     )
 }

@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import axios from 'axios';
-import AuthContext from '../context/authContext';
 import './Components.css'
 
 const Login = ()=>{
     const userID = useRef();
     const password = useRef();
-
-    const { loginFunc } = useContext(AuthContext);
+    const [errorText, setErrorText] = useState('');
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -21,20 +19,19 @@ const Login = ()=>{
             .then(res=>{
                 sessionStorage.setItem("token", res.data.AccessToken);
 
-                loginFunc(res.data);
+                    if(res.data.isAdmin===1)
+                        window.location=`/admin/${res.data.userID}`
                 
-                if(res.data.isAdmin===1)
-                    window.location=`/admin/${res.data.userID}`
-                
-                else if(res.data.isClub===1)
-                    window.location=`/club/${res.data.userID}`
+                    else if(res.data.isClub===1)
+                        window.location=`/club/${res.data.userID}`
 
-                else
-                    window.location = `/student/${res.data.userID}`
-                    
+                    else
+                        window.location = `/student/${res.data.userID}`
                     
             }).catch(err=>{
-                console.log(err.toJSON().status);
+                if(err.response.status===401)
+                    setErrorText(err.response.data)
+                console.log(err)
             })
     }
 
@@ -63,6 +60,7 @@ const Login = ()=>{
                         ref={password}
                         required
                     />
+                    <div className='error-text'>{errorText}</div>
                     <button type='submit' id='login-account'>LOGIN</button>
                 </form>
                 <p id='forget-password'>DO NOT REMEMBER PASSWORD?</p>

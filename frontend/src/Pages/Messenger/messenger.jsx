@@ -128,7 +128,7 @@ const Messenger = ({current})=>{
     return(
         <>
             <Header/>
-            <BackToDashboard/>
+            <BackToDashboard current={current}/>
             <div className='messenger'>
                 <div className="chatMenu">
                     <div className="chatMenuWrapper">

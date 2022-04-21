@@ -9,8 +9,8 @@ const Footer = ()=>{
         <div className='footer'>
             <div className='footer-div'>
                 <h1 className='site-heading'>COLLEGE FORUM.</h1>
-                <p className='footer-desc'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, 
-                    or randomised words which don’t look even slightly believable.</p>
+                <p className='footer-desc'>Discuss on placement stats, environment, events of your college, institute or university with your
+                own colleagues and seniors. Get in touch with clubs of your intrest. At your own College Forum.</p>
                 <ul>
                     <p><FaFacebook className='footer-social-icons facebook-background'/></p>
                     <p><FaInstagram className='footer-social-icons instagram-background'/></p>
@@ -22,7 +22,7 @@ const Footer = ()=>{
             <div className='footer-div'>
                 <h1 className='footer-heading'>Contact</h1>
                 <ul>
-                    <li><ImLocation className='footer-contact-icons'/> 622 Dixie Path, South Tobinchester 98336</li>
+                    <li><ImLocation className='footer-contact-icons'/>Houghton Street London WC2A 2AE</li>
                     <li><FaPhoneAlt className='footer-contact-icons'/> +1 234 56 78</li>
                     <li><MdEmail className='footer-contact-icons'/> collegeforum@gmail.com</li>
                 </ul>
