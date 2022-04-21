@@ -1,21 +1,32 @@
 const route = require('express').Router();
 const cryptoJS = require('crypto-js');
 const connection = require('../dbConnection');
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken'); 
+const { verifyTokenAndAdmin } = require('./verifyToken');
 
 
 //REGISTER
-route.post('/register',async(req,res)=>{
+route.post('/register', verifyTokenAndAdmin, async(req,res)=>{
     const reqUserID = req.body.userID;
     const reqPassword = req.body.password;
     const reqEmail = req.body.email;
-    const isClub = (req.body.isClub) ? req.body.isClub : 0;
-    const isAdmin = (req.body.isAdmin) ? req.body.isAdmin : 0;
-    res.header("Access-Control-Allow-Origin", "*");
+    const isClub = req.body.isClub;
+    const isAdmin = req.body.isAdmin;
     if(reqUserID && reqPassword && reqEmail){
         const password = cryptoJS.AES.encrypt(reqPassword, process.env.PASS_SEC_KEY).toString();
 
         try{
+
+            const checkStmt = "SELECT * FROM users WHERE userID=? OR email=?"
+            const check = await new Promise((resolve, reject)=> connection.query(checkStmt, [reqUserID, reqEmail], (err, result)=>{
+                if(err)
+                    reject(err)
+                else
+                    resolve(result)
+            }))
+
+            if(check.length!==0)
+                return res.status(400).json("USER-ID OR EMAIL ALREADY EXISTS..")
 
             const stmt = `INSERT INTO users (userID,email,password,isClub,isAdmin) VALUES ('${reqUserID}','${reqEmail}','${password}','${isClub}','${isAdmin}');`;
             const savedUser = await new Promise((resolve, reject)=> connection.query(stmt, (err, result)=>{
@@ -72,12 +83,12 @@ route.post('/login', async(req, res)=>{
                     resolve(results);
             }))
             if(user.length==0)
-                return res.status(400).json("NO SUCH USER ID EXISTS..");
+                return res.status(401).json("NO SUCH USER ID EXISTS");
 
             const hashedPass = user[0].password;
             const decryptedPass = cryptoJS.AES.decrypt(hashedPass, process.env.PASS_SEC_KEY).toString(cryptoJS.enc.Utf8);
             if(reqPassword !== decryptedPass){
-                return res.status(400).send("WRONG PASSWORD..");
+                return res.status(401).send("WRONG PASSWORD");
             }
                 
 

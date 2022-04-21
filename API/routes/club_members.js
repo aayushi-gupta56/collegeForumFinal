@@ -1,10 +1,11 @@
 const connection = require('../dbConnection');
 const route  = require('express').Router();
-const {verifyTokenAndAuth} = require('./verifyToken');
+const { verifyToken } = require('./verifyToken')
 
 //CREATE
-route.post('/:id', verifyTokenAndAuth, async(req, res)=>{
-    const memID = req.body.memID;
+route.post('/:id', verifyToken, async(req, res)=>{
+    const memID = req.body.memID
+    const position = req.body.position
     try{
 
         const stmt1 = "SELECT * FROM clubs_profile WHERE userID=?";
@@ -16,7 +17,7 @@ route.post('/:id', verifyTokenAndAuth, async(req, res)=>{
         }))
         
         if(rs1.length==0)
-            return res.status(402).json("Sorry couldn't find resource you looking for :(");
+            return res.status(400).json("   NO SUCH CLUB :(");
 
         const stmt2 = "SELECT * FROM stud_profile WHERE userID=?";
         const rs2 = await new Promise((resolve, reject)=>connection.query(stmt2, [memID], (err, result)=>{
@@ -27,17 +28,29 @@ route.post('/:id', verifyTokenAndAuth, async(req, res)=>{
         }))
             
         if(rs2.length==0)
-            return res.status(402).json("OOPS..NO STUDENT REGISTERED WITH THAT ID :(");
+            return res.status(400).json("NO SUCH ID :(");
 
-        const stmt = "INSERT INTO club_members VALUES (?,?)";
-        const rs = await new Promise((resolve, reject)=>connection.query(stmt, [req.params.id, memID], (err, result)=>{
+
+        const duplicate = "SELECT * FROM club_members WHERE memId=?"
+        const check = await new Promise((resolve, reject)=> connection.query(duplicate, [memID], (err, result)=>{
+            if(err)
+                reject(err)
+            else
+                resolve(result)
+        }))
+
+        if(check.length!==0)
+            return res.status(400).json("ALREADY A MEMBER :(")
+
+        const stmt = "INSERT INTO club_members VALUES (?,?,?)";
+        const rs = await new Promise((resolve, reject)=>connection.query(stmt, [req.params.id, memID, position], (err, result)=>{
             if(err)
                 reject(err);
             else
                 resolve(result);
         }))
             
-        return res.status(200).json("CLUB MEMBER ADDED..");
+        return res.status(200).json("MEMBER ADDED ;)");
         
 
     }catch(err){
@@ -46,10 +59,18 @@ route.post('/:id', verifyTokenAndAuth, async(req, res)=>{
 })
 
 //GET ALL MEMBERS
-route.get('/:id', verifyTokenAndAuth, async(req, res)=>{
+route.get('/:id', async(req, res)=>{
     try{
 
-       const stmt = "SELECT * FROM club_members AS c_m INNER JOIN stud_profile AS s_p ON c_m.memID = s_p.userID";
+       const stmt = "SELECT * FROM club_members AS c_m INNER JOIN stud_profile AS s_p ON c_m.memID = s_p.userID WHERE c_m.clubId=?";
+       const result = await new Promise((resolve, reject)=> connection.query(stmt,[req.params.id], (err, result)=>{
+            if(err)
+                reject(err)
+            else
+                resolve(result)
+       }))
+
+       res.status(200).json(result)
         
 
     }catch(err){
