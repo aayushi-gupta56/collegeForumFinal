@@ -4,7 +4,7 @@ import Post from './posts'
 import axios from 'axios'
 
 
-const SearchPostResults = ({tags})=>{
+const SearchPostResults = ({tags, current})=>{
 
     let [posts, setPosts] = useState([]);
 
@@ -33,7 +33,7 @@ const SearchPostResults = ({tags})=>{
           {posts.length===0 ? <div className='NoPostsDiv'><p>SORRY NO POSTS FOUND</p></div> :  
                 <div className='feedWrapper'>
                     {posts.map((p) => (
-                        <Post key={p.pid} post={p}/>
+                        <Post key={p.pid} post={p} current={current} search={true}/>
                     ))}
                 </div>
             }

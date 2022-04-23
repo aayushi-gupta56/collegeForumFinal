@@ -10,11 +10,14 @@ const membersRoute = require('./routes/club_members');
 const postsRoute = require('./routes/posts');
 const convoRoute = require('./routes/conversation');
 const msgRoute = require('./routes/message')
+const path = require("path")
 
 dotenv.config();
 
 app.use(cors());
 app.use(express.json());
+
+app.use(express.static('public'))
 
 app.use('/api/auth', authRoute);
 app.use('/api/user', userRoute);

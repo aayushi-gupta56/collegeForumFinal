@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
 import "./Components.css"
-import { BsThreeDotsVertical } from 'react-icons/bs'
-import {PF} from '../Pages/publicFolder'
+import axios from 'axios'
+import { AiOutlineDelete } from 'react-icons/ai'
+import {PF, BF} from '../Pages/publicFolder'
+import {format} from 'timeago.js'
 
 
 const ReadMore = ({children})=>{
@@ -14,13 +16,58 @@ const ReadMore = ({children})=>{
     <p className="text">
       {isReadMore ? text.slice(0, 250) : text}
       <span onClick={toggleReadMore} className="read-or-hide">
-        {isReadMore ? "...read more" : " show less"}
+        {text.length>250 && (isReadMore ? "...read more" : " show less")}
       </span>
     </p>
   );
 }
 
-const Post = ({ post })=>{
+const Post = ({ post, current, search })=>{
+
+    const [name, setName] = useState('');
+    const [profile, setProfile] = useState('');
+
+    if(search===true){
+
+      axios.get(`http://localhost:5000/api/user/find/${post.uid}`, {
+        headers: {
+          'token' : `Bearer ${sessionStorage.getItem('token')}`
+        }
+      }).then(res=>{
+
+        if(res.data.isClub===1){
+
+          axios.get(`http://localhost:5000/api/clubs/profile/${post.uid}`, {
+            headers:{
+              'token'  :`Bearer ${sessionStorage.getItem('token')}`
+            }
+          }).then(result=>{
+              setName(result.data.name)
+              setProfile(result.data.profile)
+          }).catch(err=>{
+            console.log(err);
+          })
+
+        }else if(res.data.isAdmin===0){
+
+          axios.get(`http://localhost:5000/api/stud/profile/${post.uid}`, {
+            headers:{
+              'token'  :`Bearer ${sessionStorage.getItem('token')}`
+            }
+          }).then(result=>{
+              setName(result.data.name)
+              setProfile(result.data.profile)
+          }).catch(err=>{
+            console.log(err);
+          })
+
+        }
+
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
+
     return (
         <div className="post">
         <div className="postWrapper">
@@ -28,19 +75,19 @@ const Post = ({ post })=>{
             <div className="postTopLeft">
               <img
                 className="postProfileImg"
-                src={post.profile?post.profile : `${PF}unknown.png`}
+                src={search===true ? `${BF}${profile}` : post.profile? `${BF}${post.profile}` : `${PF}unknown.png`}
                 alt=""
               />
               <div className="postTopLeftText">
               <span className="postUsername">
-                {post.name}
+                {search===true ? name : post.name}
               </span>
-              <span className='postDate'>{post.createdAt}</span>
+              <span className='postDate'>{format(post.createdAt)}</span>
               </div>
               
             </div>
             <div className="postTopRight">
-              <BsThreeDotsVertical />
+              {(current.userID===post.uid || current.isAdmin===1) && <AiOutlineDelete className='post-deleteBtn'/>}
             </div>
           </div>
           <div className="postCenter">

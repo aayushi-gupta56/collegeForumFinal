@@ -9,7 +9,6 @@
   background-image: url('../../../public/images/studentProfilePage.jpg'); 
   background-repeat: no-repeat;
   background-size: cover;
-  /* background-color: whitesmoke; */
 }
 
 .signup-form {
@@ -45,6 +44,7 @@
   border-radius: 50%;
   background-color: #add8e6;
   align-self: center;
+  position: relative;
 }
 
 .user-profile-image{
@@ -53,6 +53,44 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+.updateProfileInput{
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: transparent;
+  border: none;
+  outline: none;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  background-color: rgba(0,0,0,0.2);
+  visibility: hidden;
+}
+
+.updateProfileLabel{
+  position: absolute;
+  visibility: hidden;
+  top: 35px;
+  left: 6px;
+  z-index: 3;
+  color: white;
+}
+
+input[type=file]::file-selector-button{
+  border: none;
+  background-color: transparent;
+  color: transparent;
+}
+
+.user-profile-image-div:hover .updateProfileInput{
+  visibility: visible;
+}
+
+.user-profile-image-div:hover .updateProfileLabel{
+  visibility: visible;
+}
+
 
 /*---------------------------------------*/
 /* Form Body */

@@ -4,7 +4,7 @@ import Post from './posts'
 import axios from 'axios'
 
 
-const Feed = ()=>{
+const Feed = ({current})=>{
 
     let [posts, setPosts] = useState([]);
 
@@ -32,7 +32,7 @@ const Feed = ()=>{
         <div className="feed">
           <div className="feedWrapper">
             {posts.map((p) => (
-              <Post key={p.pid} post={p}/>
+              <Post key={p.pid} post={p} current={current} search={false}/>
             ))}
           </div>
         </div>

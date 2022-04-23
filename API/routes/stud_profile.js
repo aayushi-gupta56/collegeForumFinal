@@ -1,6 +1,30 @@
 const connection = require('../dbConnection');
 const route  = require('express').Router();
 const {verifyTokenAndAuth, verifyToken} = require('./verifyToken');
+const multer = require("multer")
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb)=>{
+        cb(null, './public/profiles')
+    },
+    filename: (req, file, cb)=>{
+        cb(null, req.params.id + Date.now())
+    }
+})
+
+const fileFilter = (req, file, cb)=>{
+    if(file.mimetype==='image/jpeg' || file.mimetype==='image/jpg' || file.mimetype==='image/png' || file.mimetype==='image/jfif' || 
+        file.mimetype==='image/webp' || file.mimetype==='image/gif'){
+            cb(null, true)
+    }else{
+        cb(null, false)
+    }
+}
+
+const upload = multer({
+    storage : storage,
+    fileFilter : fileFilter
+});
 
 
 //UPDATE PROFILE
@@ -11,15 +35,13 @@ route.put('/profile/:id', verifyTokenAndAuth, async(req, res)=>{
     const contact = (req.body.contact) ? req.body.contact : null
     const hostel = (req.body.hostel) ? req.body.hostel : null
     const dob = (req.body.dob) ? req.body.dob : null
-    const profile = (req.body.profile) ? req.body.profile : null
-    
 
     try{
 
-        stmt = `UPDATE stud_profile SET name=?, class=?, department=?, contact=?, hostel=?, dob=?, profile=? WHERE userID=?`
+        const stmt = `UPDATE stud_profile SET name=?, class=?, department=?, contact=?, hostel=?, dob=? WHERE userID=?`
         
         const rs = await new Promise((resolve, reject)=> connection.query(stmt, [
-            name, stud_class, dept, contact, hostel, dob, profile, req.params.id
+            name, stud_class, dept, contact, hostel, dob, req.params.id
         ], (err, result)=>{
             if(err)
                 reject(err);
@@ -38,6 +60,25 @@ route.put('/profile/:id', verifyTokenAndAuth, async(req, res)=>{
 
 })
 
+
+//UPLOAD PROFILE IMAGE
+route.put('/profile/picture/:id', upload.single("profile"), verifyTokenAndAuth, async (req, res)=>{
+    try{
+        const updateProfile = `UPDATE stud_profile SET profile='${req.file.filename}' WHERE userID='${req.params.id}'`
+
+            const rs = await new Promise((resolve, reject)=> connection.query(updateProfile, (err, result)=>{
+                if(err)
+                    reject(err)
+                else
+                    resolve(result)
+            }))
+
+            return res.status(200).json("PROFILE PICTURE UPDATED")
+
+    }catch(err){
+        res.status(500).json(err)
+    }
+})
 
 //GET PROFILE
 

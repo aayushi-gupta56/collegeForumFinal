@@ -113,7 +113,7 @@ function App() {
           <Route path='/messenger' element={<Messenger current={payload}/>}></Route>
 
           {/*-----------------------ROUTE TO SEARCH POST PAGE-----------------------------*/}
-          <Route path='/search/posts' element={<SearchPosts/>}/>
+          <Route path='/search/posts' element={<SearchPosts current={payload}/>}/>
 
 
           </Routes>

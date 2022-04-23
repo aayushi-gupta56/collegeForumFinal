@@ -28,7 +28,7 @@ const StyledInput = styled.textarea`
 `;
 
 const Input = React.forwardRef((props,ref) => {
-  return <StyledInput type={props.type} placeholder={props.placeholder} rows={30} ref={ref}/>;
+  return <StyledInput type={props.type} placeholder={props.placeholder} rows={25} ref={ref}/>;
 });
 
 

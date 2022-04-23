@@ -38,7 +38,7 @@ route.put('/:id', verifyTokenAndAuth, async(req, res)=>{
                 resolve(result);
         }))
         
-        const {password, isAdmin, ...others} = user[0];
+        const {password, ...others} = user[0];
         res.status(200).json({...others, message:"Password and email changed successfully.."});
         
         
@@ -90,7 +90,7 @@ route.get('/find/:id', verifyToken, async (req, res)=>{
             else
                 resolve(result);
         }))
-        const {password, isAdmin, ...others} = user[0];
+        const {password, ...others} = user[0];
         res.status(200).json(others);
     }catch(err){
         res.status(500).json(err);

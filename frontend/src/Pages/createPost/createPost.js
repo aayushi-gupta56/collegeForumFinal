@@ -2,6 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 import Input from './input';
 import Button from './button'
+import FileInput from "./fileInput";
 
 
 const MainContainer = styled.div`
@@ -50,31 +51,13 @@ const MainContainer = styled.div`
 `;
 
 const WelcomeText = styled.h2`
-  margin: 3rem 0 2rem 0;
+  margin: 3rem 0 1rem 0;
 `;
 
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: center;
-  width: 100%;
-`;
-
-const RadioContainer = styled.div`
-  margin: 20px 0 20px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-`;
-
-const RadioContainerDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-left: 3.5rem;
-  justify-content: flex-start;
   align-items: center;
   width: 100%;
 `;
@@ -94,7 +77,7 @@ const HorizontalRule = styled.hr`
   border: none;
   background: linear-gradient(to right, #14163c 0%, #03217b 79%);
   background-color: #ebd0d0;
-  margin: 1.5rem 0 1rem 0;
+  margin: 1rem 0 1rem 0;
   backdrop-filter: blur(25px);
 `;
 
@@ -102,6 +85,7 @@ const CreatePost = ()=>{
 
     const caption = React.createRef();
     const tags =  React.createRef();
+    const postImages = React.createRef(); 
 
     return(
         <div className="create-post">
@@ -110,9 +94,10 @@ const CreatePost = ()=>{
                 <InputContainer>
                     <Input type="text" placeholder="Caption" ref={caption}/>
                     <Input type="text" placeholder="TAGS IN CSV FORMAT" ref={tags}/>
+                    <FileInput name='post-image' ref={postImages}/>
                 </InputContainer>
                 <ButtonContainer>
-                    <Button content="CREATE" caption={caption} tags={tags}/>
+                    <Button content="CREATE" caption={caption} tags={tags} postImages={postImages}/>
                 </ButtonContainer>
                 <HorizontalRule />
             </MainContainer>

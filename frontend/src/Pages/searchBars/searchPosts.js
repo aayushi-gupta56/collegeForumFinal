@@ -5,7 +5,7 @@ import { BsSearch } from "react-icons/bs"
 import "./searchPosts.css"
 import SearchPostResults from '../../Components/searchPostResults'
 
-const SearchPosts = ()=>{
+const SearchPosts = ({current})=>{
     const searchTerm = useRef();
     const [term, setTerm] = useState('somthingveryrandom');
 
@@ -26,7 +26,7 @@ const SearchPosts = ()=>{
                     color: "white",
                     marginTop : "15px"
                 }}>-----------------Try writing tags you want to search in input box above-----------</p>
-                <SearchPostResults tags={term}/>
+                <SearchPostResults tags={term} current={current}/>
             </div>
             <Footer/>
         </div>
