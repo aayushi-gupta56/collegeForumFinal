@@ -4,7 +4,7 @@ import './Components.css'
 const AdminDashboardHeader = ()=>{
     return(
         <div className="adminHeadingDiv">
-            <p className="adminHeading">WELCOME BACK ADMIN!</p>
+            <p className="adminHeading">WELCOME ADMIN!</p>
         </div>
     )
 }

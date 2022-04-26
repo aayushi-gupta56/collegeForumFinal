@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { PF } from '../../Pages/publicFolder'
+import { BF, PF } from '../../Pages/publicFolder'
 import './chatOnline.css'
 
 export default function ChatOnline({online}){
@@ -45,7 +45,7 @@ export default function ChatOnline({online}){
             <div className="chatOnlineFriend">
                 <div className="chatOnlineImgContainer">
                     <img className='chatOnlineImg' 
-                        src={userData?.profile ? userData.profile : `${PF}unknown.png`} 
+                        src={userData?.profile ? `${BF}${userData.profile}` : `${PF}unknown.png`} 
                         alt="" />
                     <div className="chatOnlineBadge"></div>
                 </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Message.css'
 import {format} from 'timeago.js'
 import axios from 'axios';
-import { PF } from '../../Pages/publicFolder';
+import { PF, BF } from '../../Pages/publicFolder';
 
 export default function Message({message,own}){
     const [user, setUser] = useState(null);
@@ -46,7 +46,7 @@ export default function Message({message,own}){
         <div className={own? "message own" : "message"}>
             <div className="messageTop">
                 <img 
-                    src={user?.profile? user.profile : `${PF}unknown.png`}
+                    src={user?.profile? `${BF}${user.profile}` : `${PF}unknown.png`}
                     alt="" 
                     className='messageImg'/>
                 <p className='messageText'>{message.msg}</p>

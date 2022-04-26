@@ -1,7 +1,6 @@
 import React from 'react'
 import Header from '../Components/header'
 import ProfileHeader from '../Components/ProfileHeader'
-import Footer from '../Components/footer'
 import './Pages.css'
 import {PF} from "./publicFolder"
 
@@ -29,7 +28,7 @@ const ClubDashboard = ()=>{
             <Header />
             <ProfileHeader type="club"/>
             <div className='club-dashboard'>
-                <div className='dashboard-all'>
+                <div className='dashboard-all gridOfTwo'>
                     <div className="dashboard-posts" onClick={handleMem}>
                         <img src={`${PF}board-pin.png`} className="board-pin" alt=""></img>
                         <div id="dashboard-timeline" className="dashboard-images">
@@ -60,7 +59,6 @@ const ClubDashboard = ()=>{
                 </div>
                 </div>
             </div>
-            <Footer/>
         </div>
     )
 }

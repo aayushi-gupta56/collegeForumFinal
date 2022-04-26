@@ -10,6 +10,7 @@ const membersRoute = require('./routes/club_members');
 const postsRoute = require('./routes/posts');
 const convoRoute = require('./routes/conversation');
 const msgRoute = require('./routes/message')
+const calendarRoute = require('./routes/calendar')
 const path = require("path")
 
 dotenv.config();
@@ -27,6 +28,7 @@ app.use('/api/clubs/members', membersRoute);
 app.use('/api/posts', postsRoute);
 app.use('/api/convo', convoRoute)
 app.use('/api/msg', msgRoute);
+app.use('/api/calendar', calendarRoute);
 
 app.listen(process.env.PORT | 5000, ()=>{
     console.log("Server running on port 5000");

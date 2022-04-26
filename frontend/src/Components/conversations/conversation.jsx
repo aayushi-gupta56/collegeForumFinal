@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { PF } from "../../Pages/publicFolder";
+import { PF, BF } from "../../Pages/publicFolder";
 import './conversation.css'
 
 const Conversation=({conversation, currentUser})=>{
@@ -49,7 +49,7 @@ const Conversation=({conversation, currentUser})=>{
     return(
         <div className="conversation">
                 <img className="conversationImg" 
-                    src={user?.profile? user.profile : `${PF}unknown.png`}
+                    src={user?.profile? `${BF}${user.profile}` : `${PF}unknown.png`}
                     alt="" />
             <span className="conversationName">{user?.name}</span> 
         </div>

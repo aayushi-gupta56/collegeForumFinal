@@ -2,18 +2,17 @@ import React from "react";
 import './Pages.css';
 import Header from '../Components/header';
 import ProfileHeader from "../Components/ProfileHeader";
-import Footer from "../Components/footer";
 import {PF} from "./publicFolder"
 
 const StudentDashboard = ()=>{
+    const path = window.location.pathname.split('/')
 
     const handleFeed = ()=>{
-        const path = window.location.pathname.split('/')
         window.location = `/feed/${path[path.length-1]}`
     }
 
     const handleCalendar = ()=>{
-        window.location = '/calendar'
+        window.location = `/calendar/${path[path.length-1]}`
     }
 
     const handleSearchPosts = ()=>{
@@ -51,30 +50,24 @@ const StudentDashboard = ()=>{
                     </div>
                     <p>CHAT</p>
                 </div>
-                <div className="dashboard-posts">
-                    <img src={PF+"/board-pin.png"} className="board-pin" alt=""></img>
-                    <div id="dashboard-search-club" className="dashboard-images">
-                        <img src={PF+"/dashboard-feed.png"} alt="CLUBS"></img>
-                    </div>
-                    <p>EXPLORE CLUBS</p>
-                </div>
-                <div className="dashboard-posts">
+                <div className="next-Line">
+                <div className="dashboard-posts searchUsers">
                     <img src={PF+"/board-pin.png"} className="board-pin" alt=""></img>
                     <div id="dashboard-search-people" className="dashboard-images">
                         <img src={PF+"/dashboard-feed.png"} alt="PEOPLE"></img>
                     </div>
-                    <p>SEARCH FOR PEOPLE</p>
+                    <p>FIND CLUBS AND PEOPLE</p>
                 </div>
-                <div className="dashboard-posts" onClick={handleSearchPosts}>
+                <div className="dashboard-posts explorePosts" onClick={handleSearchPosts}>
                     <img src={PF+"/board-pin.png"} className="board-pin" alt=""></img>
                     <div id="dashboard-search-post" className="dashboard-images">
                         <img src={PF+"/dashboard-feed.png"} alt="POSTS"></img>
                     </div>
-                    <p>LOOK FOR POSTS</p>
+                    <p>EXPLORE POSTS</p>
+                </div>
                 </div>
             </div>
             </div>
-            <Footer />
         </div>
     );
 }

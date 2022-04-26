@@ -8,7 +8,7 @@ import AdminUpdate from './Pages/adminUpdate';
 import Error from './Pages/errors/error'
 import CreatePost from './Pages/createPost/createPost'
 import StudentProfilePage from './Pages/profilePage/studentProfile';
-import Calendar from './Pages/Calendar/calendar'
+import Calendar from './Pages/calendarEvents/calendar'
 import Messenger from './Pages/Messenger/messenger'
 import AdminViewAll from './Pages/AdminTable/adminViewAll';
 import SearchPosts from './Pages/searchBars/searchPosts';
@@ -106,8 +106,8 @@ function App() {
 
 
           {/*-----------------------ROUTE TO CALENDAR PAGE-----------------------------*/}
-          <Route path='/calendar' 
-            element={<Calendar/>}/>
+          <Route path='/calendar/:id' 
+            element={payload==null ? <Navigate to="/" replace /> : <Calendar/>}/>
 
           {/*-----------------------ROUTE TO CREATE POST PAGE-----------------------------*/}
           <Route path='/messenger' element={<Messenger current={payload}/>}></Route>

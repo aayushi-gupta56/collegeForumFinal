@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../../Components/header'
-import { PF } from '../publicFolder';
+import { PF, BF } from '../publicFolder';
 import { MdOutlineDelete } from 'react-icons/md'
 import { AiOutlineEye } from 'react-icons/ai'
 import axios from 'axios'
@@ -83,7 +83,7 @@ const MemberPage = ({current})=>{
                     return(
                         <div className='singleMember'>
                             <div className='memberImgDiv'>
-                                <img src={element.profile ? element.profile : `${PF}unknown.png`} className='memberImg'/>
+                                <img src={element.profile ? `${BF}${element.profile}` : `${PF}unknown.png`} className='memberImg'/>
                             </div>
                             <div className='memberAbout'>
                                 <p className='aboutName'>{element.name}</p>

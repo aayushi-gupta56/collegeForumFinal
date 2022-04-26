@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "../Components/header";
-import Footer from '../Components/footer';
 import AdminDashboardHeader from "../Components/adminDashboardHeader";
 import './Pages.css';
 import {PF} from './publicFolder'
@@ -51,7 +50,6 @@ const AdminDashboard = ()=>{
 
                 </div>
             </div>
-            <Footer />
         </div>
     )
 }

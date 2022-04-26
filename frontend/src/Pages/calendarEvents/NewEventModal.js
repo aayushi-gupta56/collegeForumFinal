@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 export const NewEventModal = ({ onSave, onClose }) => {
   const [title, setTitle] = useState('');
-  const [error, setError] = useState(false);
 
   return(
     <>
@@ -10,7 +9,6 @@ export const NewEventModal = ({ onSave, onClose }) => {
         <h2>New Event</h2>
 
         <input 
-          className={error ? 'error' : ''}
           value={title} 
           onChange={e => setTitle(e.target.value)} 
           id="eventTitleInput" 
@@ -18,14 +16,7 @@ export const NewEventModal = ({ onSave, onClose }) => {
         />
 
         <button 
-          onClick={() => {
-            if (title) {
-              setError(false);
-              onSave(title);
-            } else {
-              setError(true);
-            }
-          }} 
+          onClick={()=>onSave(title)} 
           id="saveButton">Save</button>
 
 

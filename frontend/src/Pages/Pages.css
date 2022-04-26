@@ -225,6 +225,10 @@
 
 /*-------------------------------------------------- CLUB DASHBOARD -----------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------*/
+.gridOfTwo{
+    grid-template-columns: repeat(2, 1fr); 
+}
+
 .club-dashboard{
     background-blend-mode: overlay;
     background-image: url("../../public/images/dashboard.png");
@@ -236,12 +240,7 @@
     background-size: cover;
     display: flex; 
     justify-content: center;
-    align-items: center;   
-}
-
-#feedGrid{
-    grid-column-start: 2;
-    grid-column-end: 3;
+    align-items: center;  
 }
 
 /*-------------------------------------------------- STUDENT DASHBOARD -----------------------------------------------------------
@@ -258,6 +257,24 @@
     display: flex; 
     justify-content: center;
     align-items: center;     
+}
+
+.next-Line{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchUsers{
+    width: 290px;
+}
+
+.explorePosts{
+    margin-left: 20px;
+    width: 290px;
 }
 
 

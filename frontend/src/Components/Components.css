@@ -54,32 +54,44 @@ li{
     margin-right: 7px;
 }
 
-.backToDasboard{
+
+/* -------------------------------------------MESSENGER HEADER STYLES-----------------------------------------------
+-------------------------------------------------------------------------------------------------------------*/
+
+.messengerHeader{
     width: 100%;
     height: 50px;
     background-color: #f5fcff;
     display: flex;
-    position: relative;
+    flex-direction: row;
+    align-items: center;
 }
 
-.dashboardButton{
-    position: absolute;
-    top: 8px;
-    left: 10px;
+.messengerHeaderBtn{
+    height: 30px;
     background-color: #2f4ad0;
     color: white;
-    padding: 8px;
+    padding: 2px;
     font-size: 17px;
     border-radius: 5%;
     cursor: pointer;
     width: max-content;
+    margin-right: 20px;
+    margin-left: 20px;
+    border: solid transparent 3px;
 }
 
-.dashboardButton:hover{
+.messengerHeaderBtn:hover{
     background-color: white;
     color: #2f4ad0;
     border: solid #2f4ad0 3px;
-    padding: 5px;
+}
+
+.messengerWelcome{
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
 }
 
 
