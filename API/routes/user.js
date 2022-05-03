@@ -97,6 +97,41 @@ route.get('/find/:id', verifyToken, async (req, res)=>{
     }
 })
 
+
+//GET USER ACCORDING TO ID OR NAME
+route.get('/search', verifyToken, async(req, res)=>{
+    const term = req.query.term
+    try{
+        const stmt = `SELECT * FROM users AS u INNER JOIN clubs_profile AS cp ON u.userID=cp.userID WHERE cp.userID LIKE '%${term}%' OR cp.name LIKE '%${term}%'`
+        const clubs = await new Promise((resolve, reject)=>connection.query(stmt, (err, result)=>{
+            if(err)
+                reject(err)
+            else
+                resolve(result)
+        }))
+
+        const st = `SELECT * FROM users AS u INNER JOIN stud_profile AS sp ON u.userID=sp.userID WHERE sp.userID LIKE '%${term}%' OR sp.name LIKE '%${term}%'`
+        const stud = await new Promise((resolve, reject)=>connection.query(st, (err, result)=>{
+            if(err)
+                reject(err)
+            else
+                resolve(result)
+        }))
+
+       const ans = Object.assign(clubs, stud)
+
+        ans.forEach(object => {
+            delete object['password'];
+        });
+
+        res.status(200).json(ans)
+
+    }catch(err){
+        res.status(500).json(err)
+    }
+})
+
+
 //GET ALL USERS
 route.get('/find', verifyTokenAndAdmin, async (req, res)=>{
     try{

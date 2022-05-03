@@ -15,6 +15,7 @@
     align-items: center;
     background-color: #130f40;
     font-family: 'Lato' !important;
+    position: relative;
 }
 
 .search-box{
@@ -57,6 +58,9 @@
     border-radius: 50%;
     color:#ffffff ;
     background-color:crimson;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .NoPostsDiv{
@@ -69,4 +73,21 @@
     justify-content: center;
     margin-top: 20px;
     border-radius: 25px;
+}
+
+.back-btn-searchPosts{
+    background-color: crimson;
+    position: absolute;
+    top:10px;
+    left: 10px;
+    height: 45px;
+    width: 45px;
+    color: white;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
 }

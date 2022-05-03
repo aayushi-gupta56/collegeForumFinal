@@ -9,6 +9,8 @@
   background-image: url('../../../public/images/studentProfilePage.jpg'); 
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: rgba(0,0,0,0.6);
+  background-blend-mode: overlay;
 }
 
 .signup-form {
@@ -185,12 +187,12 @@ input[type="file"] {
 }
 
 .diff-btn{
-  margin-top: 10px;
   color:#1BBA93;  
   cursor: pointer;
   font-style: italic;
   text-decoration: underline;
   font-weight: 500;
+  font-size: 15px;
 }
 
 .diff-btn:hover{
@@ -201,16 +203,17 @@ input[type="file"] {
   margin-top: 10px;
 }
 
-.btn {
+.profile-cancel-btn {
    background-color: #1BBA93;
    font-size:17px;
    border:none;
    border-radius:5px;
    color:#bcf5e7;
    cursor:pointer;
+   padding: 7px 7px;
 }
 
-.btn:hover {
+.profile-cancel-btn:hover {
   background-color: #169c7b;
   color:white;
 }

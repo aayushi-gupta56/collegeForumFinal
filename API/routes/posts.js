@@ -1,10 +1,35 @@
 const route = require('express').Router();
 const { verifyTokenAndAuth, verifyToken } = require('./verifyToken');
 const con = require('../dbConnection');
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb)=>{
+        cb(null, './public/posts')
+    },
+    filename: (req, file, cb)=>{
+        cb(null, req.params.id + Date.now())
+    }
+})
+
+const fileFilter = (req, file, cb)=>{
+    if(file.mimetype==='image/jpeg' || file.mimetype==='image/jpg' || file.mimetype==='image/png' || file.mimetype==='image/jfif' || 
+        file.mimetype==='image/webp' || file.mimetype==='image/gif'){
+            cb(null, true)
+    }else{
+        cb(null, false)
+    }
+}
+
+const upload = multer({
+    storage : storage,
+    fileFilter : fileFilter
+})
 
 //CREATE POST
-route.post('/:id', verifyTokenAndAuth, async(req, res)=>{
+route.post('/:id', upload.single("photo"), verifyTokenAndAuth, async(req, res)=>{
     const userID = req.params.id;
+    const photo = req.file.filename;
     try{
 
         const stmt = "SELECT userID, isAdmin from users WHERE (userID=? AND isAdmin=?)"
@@ -27,9 +52,9 @@ route.post('/:id', verifyTokenAndAuth, async(req, res)=>{
                     currentDate.getMinutes().toString() + 
                     currentDate.getSeconds().toString();
                     
-        const stmt1 = "INSERT INTO posts(pid, uid, caption) VALUES(?,?,?)"
+        const stmt1 = "INSERT INTO posts(pid, uid, caption, photo) VALUES(?,?,?,?)"
         const results = await new Promise((resolve, reject)=> con.query(stmt1, 
-            [pid, userID, req.body.caption],
+            [pid, userID, req.body.caption, photo],
             (err, result)=>{
                 if(err)
                     reject(err)
@@ -123,8 +148,8 @@ route.get('/find', verifyToken, async(req, res)=>{
 
 
 //DELETE A POST
-route.delete('/:id',verifyTokenAndAuth, async(req, res)=>{
-    const postID = req.body.postID;
+route.delete('/:id/:postID',verifyTokenAndAuth, async(req, res)=>{
+    const postID = req.params.postID;
     try{
 
         const stmt = "DELETE FROM posts WHERE pid=?"

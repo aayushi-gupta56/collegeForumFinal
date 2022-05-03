@@ -27,7 +27,7 @@ const ProfilePage = ({current})=>{
         if(current.isAdmin===1)
             window.location = '/admin/find'
         else
-            window.location = `/student/${urID}`
+            window.location = `/student/${current.userID}`
     }
 
     //METHOD TO HANDLE SAVE CHANGES
@@ -134,7 +134,7 @@ const ProfilePage = ({current})=>{
                 <div className="form-footer">
                     {current.userID===urID && <button type='submit' className='diff-btn'>SAVE CHANGES</button>}
                     <span id='message'></span>
-                    <button type="button" className="btn" onClick={handleClose}>CANCEL</button>
+                    <button type="button" className="profile-cancel-btn" onClick={handleClose}>CANCEL</button>
                 </div>
 
             </form>

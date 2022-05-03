@@ -5,6 +5,7 @@ import {MdOutlineNotificationsActive} from 'react-icons/md';
 import {FaUserAlt} from 'react-icons/fa';
 import {FiLogOut} from 'react-icons/fi';
 import {PF, BF} from '../Pages/publicFolder'
+import {format} from 'timeago.js'
 
 
 const ProfileHeader = ({type})=>{
@@ -12,6 +13,13 @@ const ProfileHeader = ({type})=>{
     const userID = path[path.length-1];
     
     const [profData, setProfData] = useState(null);
+    const [events, setEvents] = useState([]);
+    const [clicked, setClicked] = useState(false)
+
+    const toggleClick = ()=>{
+        setClicked(!clicked)
+        console.log(clicked)
+    }
 
     useEffect(()=>{
 
@@ -41,6 +49,16 @@ const ProfileHeader = ({type})=>{
 
         }
 
+        axios.get(`http://localhost:5000/api/calendar/recents/${userID}`, {
+            headers:{
+                "token": `Bearer ${sessionStorage.getItem("token")}`
+            }
+        }).then(results=>{
+            setEvents(results.data);
+        }).catch(err=>{
+            console.log(err);
+        })
+
 
     },[])
 
@@ -66,7 +84,20 @@ const ProfileHeader = ({type})=>{
             </div>
             <div className="profile-header-feature">
                 <div className="notify-feature">
-                    <MdOutlineNotificationsActive id="notify"/>
+                    <MdOutlineNotificationsActive id="notify" onClick={toggleClick}/>
+                    {events.length!==0 && <div className={clicked? "notificationNumber hiddenNotif" : "notificationNumber"}>{events.length}</div>}
+                    <div>
+                        <ul className={clicked? "drop-menu visibleNotif" : "drop-menu"}>
+                            {events.map(ev=>{
+                                return(
+                                    <li key={ev?.eid} className='drop-menu-item'>
+                                        <p className="event">{ev?.event}</p>
+                                        <p className="eventDate"> {format(ev?.event_Date)}</p>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
                 </div>
                 <div className="profile-feature" onClick={handleProfile}>
                     <FaUserAlt id="profile"/>

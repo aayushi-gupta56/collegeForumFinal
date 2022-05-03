@@ -19,6 +19,10 @@ const StudentDashboard = ()=>{
         window.location = '/search/posts'
     }
 
+    const handleSearchPeople = ()=>{
+        window.location = '/search/users'
+    }
+
     const handleChat = ()=>{
         window.location = '/messenger'
     }
@@ -51,7 +55,7 @@ const StudentDashboard = ()=>{
                     <p>CHAT</p>
                 </div>
                 <div className="next-Line">
-                <div className="dashboard-posts searchUsers">
+                <div className="dashboard-posts searchUsers" onClick={handleSearchPeople}>
                     <img src={PF+"/board-pin.png"} className="board-pin" alt=""></img>
                     <div id="dashboard-search-people" className="dashboard-images">
                         <img src={PF+"/dashboard-feed.png"} alt="PEOPLE"></img>

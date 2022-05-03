@@ -385,6 +385,68 @@ ul p{
     cursor: pointer;
 }
 
+.notify-feature{
+    position: relative;
+}
+
+.drop-menu{
+    background-color: white;
+    position: absolute;
+    width: 400px;
+    top: 55px;
+    margin-left: -180px;
+    height: 0;
+    overflow: hidden;
+    transition: all 1s ease-in-out;
+}
+
+.visibleNotif{
+    height: 350px;
+    overflow-y: auto;
+    overflow-x: auto;
+    transition: all 1s ease-in-out;
+}
+
+.drop-menu-item{
+    padding: 30px 20px;
+    transition: all 1s ease-in-out;
+}
+
+.drop-menu-item:nth-child(odd){
+    background-color: #f5fcff;
+}
+
+.event{
+    font-size: 21px;
+    text-transform: capitalize;
+}
+
+.eventDate{
+    font-size: 19px;
+    color: #ccc;
+    font-weight: 600;
+}
+
+.notificationNumber{
+    position: absolute;
+    background-color: #D0342C;
+    height: 17px;
+    width: 17px;
+    color: white;
+    font-size: 14px;
+    border-radius: 50%;
+    top: 0;
+    margin-top: -4px;
+    margin-left: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 1s ease-in-out;
+}
+
+.hiddenNotif{
+    visibility: hidden;
+}
 
 
 /*-------------------------------------------------- FEED -----------------------------------------------------------
@@ -456,7 +518,7 @@ ul p{
   .postImg{
       margin-top: 20px;
       width: 100%;
-      max-height: 500px;
+      max-height: 400px;
       object-fit: contain;
   }
 
@@ -471,12 +533,101 @@ ul p{
   }
 
   .post-deleteBtn{
-    font-size: 22px;
+    font-size: 23px;
     margin-right: 20px;
     margin-top: 7px;
+    cursor: pointer;
   }
 
 
+/* -------------------------------------------SEARCH USERS RESULTS STYLES-----------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------*/
+.searchUsersResults{
+    display: flex;
+    margin: 12px 0;
+    width: 60%;
+}
+
+.NoPostsDiv{
+    background-color: white;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    border-radius: 25px;
+}
+
+.searchUsersWrapper{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* -------------------------------------------USERS-----------------------------------------------
+-------------------------------------------------------------------------------------------------*/
+.singleUser{
+    width: 100%;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-radius: 5px;
+    padding: 12px 0;
+}
+
+.singleUserLeft{
+    margin: 0 0 0 20px;
+    display: flex;
+    flex-direction: row;
+    flex: 2;
+}
+
+.singleUserProfilePicture{
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    border: none;
+    object-fit: cover;
+}
+
+.singleUserLeftText{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 12px;
+}
+
+.singleName{
+    font-size: 19px;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+.singleID{
+    letter-spacing: 1px;
+}
+
+.singleUserRight{
+    margin-right: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex: 1;
+}
+
+.singleUserRightBtn{
+    background-color: crimson;
+    color: white;
+    padding: 10px 7px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
 
 
 /* -------------------------------------------RESPONSIVE STYLES-----------------------------------------------

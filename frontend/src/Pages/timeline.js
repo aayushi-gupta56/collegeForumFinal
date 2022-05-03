@@ -88,7 +88,7 @@ const Timeline = ({curUser})=>{
                     <img src={profile? `${BF}${profile}` : `${PF}unknown.png`}alt="Profile" className="profile-image"></img>
                 </div>
             </div>
-            <button className="timeline-create-post" onClick={handleCreate}>What's on your mind?</button>
+            {curUser.userID===getInfoAbout && <button className="timeline-create-post" onClick={handleCreate}>What's on your mind?</button>}
             <Feed current={curUser}/>
         </div>
     )

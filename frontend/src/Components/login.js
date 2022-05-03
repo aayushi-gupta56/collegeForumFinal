@@ -63,7 +63,6 @@ const Login = ()=>{
                     <div className='error-text'>{errorText}</div>
                     <button type='submit' id='login-account'>LOGIN</button>
                 </form>
-                <p id='forget-password'>DO NOT REMEMBER PASSWORD?</p>
                 <h2>&nbsp;</h2>
             </div>
         </div>

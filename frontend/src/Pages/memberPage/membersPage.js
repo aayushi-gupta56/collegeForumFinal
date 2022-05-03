@@ -5,7 +5,6 @@ import { MdOutlineDelete } from 'react-icons/md'
 import { AiOutlineEye } from 'react-icons/ai'
 import axios from 'axios'
 import './memberPage.css'
-import { BsChevronDoubleLeft } from 'react-icons/bs';
 
 const MemberPage = ({current})=>{
     const[errorText, setErrorText] = useState("");
@@ -30,7 +29,7 @@ const MemberPage = ({current})=>{
         else if(current.isAdmin===1)
             window.location = `/admin/${current.userID}`
         else
-            window.location = `/stud/${current.userID}`
+            window.location = `/student/${current.userID}`
     }
 
     const handleSubmit = (e)=>{
@@ -68,7 +67,7 @@ const MemberPage = ({current})=>{
             <Header/>
             <div className='memberList'>
                 <button className='dashboard-btn-members' onClick={handleBack}>DASHBOARD</button>
-                <div className='singleMember'>
+                {current.userID===club && <div className='singleMember'>
                     <div className='memberImgDiv'>
                         <img src={`${PF}unknown.png`} className='memberImg'/>
                     </div>
@@ -78,7 +77,7 @@ const MemberPage = ({current})=>{
                         <span className='newErrorText'>{errorText}</span>
                         <button type='submit' className='newMemBtn'>ADD MEMBER</button>
                     </form>
-                </div>
+                </div>}
                 {members.map((element)=>{
                     return(
                         <div className='singleMember'>
@@ -91,11 +90,11 @@ const MemberPage = ({current})=>{
                                 <p className='aboutPOS'>{element.position}</p>
                             </div>
                             <div className='memberLinks'>
-                                <div className='deleteLink'>
+                                {current.userID===club && <div className='deleteLink'>
                                     <MdOutlineDelete/>
                                     <p>Delete</p>
-                                </div>
-                                <div className='viewLink'>
+                                </div>}
+                                <div className={current.userID===club ? 'viewLink' : 'viewLink centerLink'}>
                                     <AiOutlineEye/>
                                     <p>View</p>
                                 </div>   

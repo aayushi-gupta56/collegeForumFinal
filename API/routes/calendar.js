@@ -68,4 +68,25 @@ route.delete('/:id/:deleteId', verifyTokenAndAuth, async(req, res)=>{
     }
 })
 
+route.get('/recents/:id', verifyTokenAndAuth, async (req, res)=>{
+    const uid = req.params.id;
+    try{
+        let start = new Date()
+        let end = new Date()
+        end.setDate(start.getDate()+7)
+        const stmt = `SELECT * FROM calendar WHERE uid=? AND (event_Date>=? AND event_Date<=?) ORDER BY 'event_Date'`
+        const results = await new Promise((resolve, reject)=>connection.query(stmt, [uid, start, end], (err, result)=>{
+            if(err)
+                reject(err)
+            else
+                resolve(result)
+        }))
+
+        res.status(200).json(results);
+
+    }catch(err){
+        res.status(500).json(err);
+    }
+})
+
 module.exports = route;

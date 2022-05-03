@@ -1,29 +1,25 @@
 import styled from "styled-components";
 import axios from 'axios'
 
-export default function Button({ content, caption,tags }) {
+export default function Button({ content, caption,tags, postImages }) {
 
   const handleClick = ()=>{
     const path = window.location.pathname.split('/');
     const userID = path[path.length-1];
-    
-    axios.post(`http://localhost:5000/api/posts/${userID}`, {
-        tags : tags.current.value,
-        caption : caption.current.value
-    }, {
-      headers :{
-        "token" : `Bearer ${sessionStorage.getItem("token")}`
-      }
-    })
-    .then(res=>{
-      if(res.status === 200){
-        window.location = `/feed/${userID}`
-      }
-      else{
-        console.log(res);
-      }
-    })
 
+    const formData = new FormData()
+    formData.append("photo", postImages.current.files[0])
+    formData.append("tags", tags.current.value)
+    formData.append("caption", caption.current.value)
+
+    axios.post(`http://localhost:5000/api/posts/${userID}`, formData, {
+       headers :{
+         "token" : `Bearer ${sessionStorage.getItem("token")}`
+       }
+     }).then(res=>{
+       if(res.status===200)
+        window.location = `/feed/${userID}`
+     })
   }
 
   return <StyledButton onClick={handleClick}>{content}</StyledButton>;

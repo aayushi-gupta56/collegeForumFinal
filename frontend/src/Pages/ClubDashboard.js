@@ -4,7 +4,7 @@ import ProfileHeader from '../Components/ProfileHeader'
 import './Pages.css'
 import {PF} from "./publicFolder"
 
-const ClubDashboard = ()=>{
+const ClubDashboard = ({current})=>{
 
     const handleMem = ()=>{
         window.location = window.location.pathname + '/members'
@@ -16,7 +16,7 @@ const ClubDashboard = ()=>{
     }
 
     const handleCalendar = ()=>{
-        window.location = '/calendar'
+        window.location = `/calendar/${current.userID}`
     }
 
     const handleChat = ()=>{

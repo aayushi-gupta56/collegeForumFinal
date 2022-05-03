@@ -155,6 +155,10 @@
     border-right: 1px solid #d3d3d3;
 }
 
+.centerLink{
+    flex: 1;
+}
+
 .memberLinks p{
     display: inline;
 }

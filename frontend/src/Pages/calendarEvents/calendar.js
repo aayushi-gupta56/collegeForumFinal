@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import FullCalendar from '@fullcalendar/react'
+import FullCalendar, { WindowScrollController } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction'
 import { NewEventModal } from './NewEventModal'
 import { DeleteEventModal } from './DeleteEventModal'
+import {BiArrowBack} from 'react-icons/bi'
 import axios from 'axios'
 import './calendar.css'
 
-const Calendar = ()=>{
+const Calendar = ({payload})=>{
     const path = window.location.pathname.split('/')
     const uid = path[path.length-1]
     const [data,setData] = useState([]);
@@ -58,6 +59,13 @@ const Calendar = ()=>{
     const handleEventClick = (e)=>{
         setDelete(true);
         setDeleteEvent(e.event._def);
+    }
+
+    const handleClose = ()=>{
+        if(payload.isClub===1)
+            window.location = `/club/${uid}`
+        else if(payload.isAdmin===0)
+            window.location = `/student/${uid}`
     }
 
     useEffect(()=>{
@@ -127,6 +135,9 @@ const Calendar = ()=>{
 
     return(
         <div className='calendar-div-wrap'>
+            <button className='back-button-calendar' onClick={handleClose}>
+                <BiArrowBack/>
+            </button>
             <div className='calendar-div'>
                 <FullCalendar
                     events={data} 

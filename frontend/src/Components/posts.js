@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import "./Components.css"
 import axios from 'axios'
 import { AiOutlineDelete } from 'react-icons/ai'
-import {PF, BF} from '../Pages/publicFolder'
+import {PF, BF, POSTPF} from '../Pages/publicFolder'
 import {format} from 'timeago.js'
 
 
@@ -68,6 +68,18 @@ const Post = ({ post, current, search })=>{
       })
     }
 
+    const handleDelete = ()=>{
+      axios.delete(`http://localhost:5000/api/posts/${post.uid}/${post.pid}`, {
+        headers :{
+          "token": `Bearer ${sessionStorage.getItem("token")}`
+        }
+      }).then(res=>{
+        window.location.reload(false);
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
+
     return (
         <div className="post">
         <div className="postWrapper">
@@ -75,7 +87,7 @@ const Post = ({ post, current, search })=>{
             <div className="postTopLeft">
               <img
                 className="postProfileImg"
-                src={search===true ? `${BF}${profile}` : post.profile? `${BF}${post.profile}` : `${PF}unknown.png`}
+                src={search===true ? profile? `${BF}${profile}` : `${PF}unknown.png` : post.profile? `${BF}${post.profile}` : `${PF}unknown.png`}
                 alt=""
               />
               <div className="postTopLeftText">
@@ -87,7 +99,7 @@ const Post = ({ post, current, search })=>{
               
             </div>
             <div className="postTopRight">
-              {(current.userID===post.uid || current.isAdmin===1) && <AiOutlineDelete className='post-deleteBtn'/>}
+              {(current.userID===post.uid || current.isAdmin===1) && <AiOutlineDelete className='post-deleteBtn' onClick={handleDelete}/>}
             </div>
           </div>
           <div className="postCenter">
@@ -96,7 +108,7 @@ const Post = ({ post, current, search })=>{
                 {post?.caption}
               </ReadMore>
             </span>
-            <img className="postImg" src={post?.photo} alt="" />
+            <img className="postImg" src={post.photo && `${POSTPF}${post.photo}`} alt="" />
           </div>
         </div>
       </div>

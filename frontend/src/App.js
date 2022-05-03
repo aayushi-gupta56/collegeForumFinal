@@ -20,6 +20,7 @@ import {
 } from "react-router-dom";
 import AdminAddUser from './Pages/AdminAddUser/adminAddUser';
 import MemberPage from './Pages/memberPage/membersPage';
+import SearchPeople from './Pages/searchBars/searchPeople'
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -59,8 +60,7 @@ function App() {
           {/*-----------------------ROUTE TO CLUB DASHBOARD-----------------------------*/}
           <Route path="/club/:id" 
             element={payload === null ? <Navigate to="/" replace /> :
-                                        payload.isClub === 1 ? <ClubDashboard/>:
-                                        payload.isAdmin === 1? <ClubDashboard/>:
+                                        payload.isClub === 1 ? <ClubDashboard current={payload}/>:
                                                                <Navigate to='/error' replace/>}/> 
 
           {/*-----------------------ROUTE TO CLUB MEMBERS PAGE-----------------------------*/}
@@ -97,7 +97,7 @@ function App() {
 
           {/*-----------------------ROUTE TO CREATE POST PAGE-----------------------------*/}
           <Route path='/feed/create/:id' 
-            element={<CreatePost/>}/>
+            element={<CreatePost payload={payload}/>}/>
 
 
           {/*-----------------------ROUTE TO STUDENT PROFILE PAGE-----------------------------*/}
@@ -107,13 +107,21 @@ function App() {
 
           {/*-----------------------ROUTE TO CALENDAR PAGE-----------------------------*/}
           <Route path='/calendar/:id' 
-            element={payload==null ? <Navigate to="/" replace /> : <Calendar/>}/>
+            element={payload==null ? <Navigate to="/" replace /> : <Calendar payload={payload}/>}/>
+            
 
           {/*-----------------------ROUTE TO CREATE POST PAGE-----------------------------*/}
           <Route path='/messenger' element={<Messenger current={payload}/>}></Route>
 
+
+
           {/*-----------------------ROUTE TO SEARCH POST PAGE-----------------------------*/}
           <Route path='/search/posts' element={<SearchPosts current={payload}/>}/>
+
+
+
+          {/*-----------------------ROUTE TO SEARCH USERS PAGE-----------------------------*/}
+          <Route path='/search/users' element={<SearchPeople current={payload}/>}/>
 
 
           </Routes>

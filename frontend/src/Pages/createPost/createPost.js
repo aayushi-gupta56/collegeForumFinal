@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Input from './input';
 import Button from './button'
 import FileInput from "./fileInput";
-
+import {BiArrowBack} from 'react-icons/bi'
 
 const MainContainer = styled.div`
   display: flex;
@@ -81,20 +81,48 @@ const HorizontalRule = styled.hr`
   backdrop-filter: blur(25px);
 `;
 
+const BackButton = styled.button`
+      position: absolute;
+      top:10px;
+      left:10px;
+      background: linear-gradient(to right, #14163c 0%, #03217b 79%);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      cursor: pointer;
+`;
+
 const CreatePost = ()=>{
 
     const caption = React.createRef();
     const tags =  React.createRef();
     const postImages = React.createRef(); 
 
+    const path = window.location.pathname.split('/')
+    const uid = path[path.length-1]
+
+    const handleClose = ()=>{
+        window.location = `/feed/${uid}`
+    }
+
     return(
-        <div className="create-post">
+        <div className="create-post" style={{
+          position : "relative"
+        }}>
+            <BackButton onClick={handleClose}>
+                <BiArrowBack/>
+            </BackButton>
             <MainContainer>
                 <WelcomeText>CREATE POST</WelcomeText>
                 <InputContainer>
-                    <Input type="text" placeholder="Caption" ref={caption}/>
-                    <Input type="text" placeholder="TAGS IN CSV FORMAT" ref={tags}/>
-                    <FileInput name='post-image' ref={postImages}/>
+                    <Input type="text" name='tags' placeholder="Caption" ref={caption}/>
+                    <Input type="text" name='caption' placeholder="TAGS IN CSV FORMAT" ref={tags}/>
+                    <FileInput name='photo' ref={postImages}/>
                 </InputContainer>
                 <ButtonContainer>
                     <Button content="CREATE" caption={caption} tags={tags} postImages={postImages}/>
