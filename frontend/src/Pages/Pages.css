@@ -133,6 +133,7 @@
     width: 180px;
     border-radius: 50%;
     border: none;
+    object-fit: cover;
     align-self: center;
 }
 

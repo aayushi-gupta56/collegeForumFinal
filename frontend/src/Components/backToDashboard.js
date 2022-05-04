@@ -7,7 +7,7 @@ const BackToDashboard = ({current})=>{
 
     const handleBack = ()=>{
         let c
-        current.isClub===1 ? c='club' : current.isAdmin===1 ? c='admin' : c='stud'
+        current.isClub===1 ? c='club' : current.isAdmin===1 ? c='admin' : c='student'
         window.location = `/${c}/${current.userID}`
     }
 

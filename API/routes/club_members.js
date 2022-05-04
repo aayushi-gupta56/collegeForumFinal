@@ -1,6 +1,6 @@
 const connection = require('../dbConnection');
 const route  = require('express').Router();
-const { verifyToken } = require('./verifyToken')
+const { verifyToken, verifyTokenAndAuth } = require('./verifyToken')
 
 //CREATE
 route.post('/:id', verifyToken, async(req, res)=>{
@@ -17,7 +17,7 @@ route.post('/:id', verifyToken, async(req, res)=>{
         }))
         
         if(rs1.length==0)
-            return res.status(400).json("   NO SUCH CLUB :(");
+            return res.status(400).json("NO SUCH CLUB :(");
 
         const stmt2 = "SELECT * FROM stud_profile WHERE userID=?";
         const rs2 = await new Promise((resolve, reject)=>connection.query(stmt2, [memID], (err, result)=>{
@@ -77,5 +77,28 @@ route.get('/:id', async(req, res)=>{
         res.status(500).json(err);
     }
 })
+
+
+//DELETE A MEMBER
+route.delete('/:id/:memID', verifyTokenAndAuth, async (req, res)=>{
+    const club = req.params.id
+    const member = req.params.memID
+    try{
+
+        const stmt = `DELETE FROM club_members WHERE clubId=? AND memId=?`
+        const ans = await new Promise((resolve, reject)=>connection.query(stmt, [club, member], (err, result)=>{
+            if(err)
+                reject(err)
+            else
+                resolve(result)
+        }))
+
+        res.status(200).json("DELETED SUCCESSFULLY.")
+
+    }catch(err){
+        res.status(500).json(err);
+    }
+})
+
 
 module.exports = route;

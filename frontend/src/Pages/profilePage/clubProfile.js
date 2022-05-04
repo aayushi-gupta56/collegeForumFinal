@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './profilePage.css'
 import axios from 'axios'
-import {PF} from '../publicFolder';
+import {PF, BF} from '../publicFolder';
 
 
 const ProfilePage = ({current})=>{
@@ -11,7 +11,7 @@ const ProfilePage = ({current})=>{
     const urID = path[path.length-1];
 
     useEffect(()=>{
-        axios.get(`http://localhost:5000/api/stud/profile/${urID}`,{
+        axios.get(`http://localhost:5000/api/clubs/profile/${urID}`,{
             headers:{
                 "token" : `Bearer ${sessionStorage.getItem("token")}`
             }
@@ -26,8 +26,10 @@ const ProfilePage = ({current})=>{
     const handleClose = ()=>{
         if(current.isAdmin==1)
             window.location = '/admin/find'
+        else if(current.isClub===1)
+            window.location = `/club/${current.userID}`
         else
-            window.location = `/student/${urID}`
+            window.location = `/student/${current.userID}`
     }
 
     //METHOD TO HANDLE SAVE CHANGES
@@ -36,14 +38,15 @@ const ProfilePage = ({current})=>{
         
         const newUser = {
              name: e.target["name"].value,
-             class: e.target["class"].value,
+             lead: e.target["lead"].value,
              department: e.target["department"].value,
              contact : e.target["contact"].value,
-             hostel : e.target["hostel"].value,
-             dob: e.target["dob"].value
+             faculty : e.target["faculty"].value,
+             objective: e.target["objective"].value,
+             alternate: e.target["alternate"].value
         }
         
-            axios.put(`http://localhost:5000/api/stud/profile/${urID}`, newUser, {
+            axios.put(`http://localhost:5000/api/clubs/profile/${urID}`, newUser, {
              headers : {
                  "token" : `Bearer ${sessionStorage.getItem("token")}`
              }
@@ -58,6 +61,22 @@ const ProfilePage = ({current})=>{
         })
     }
 
+    //METHOD TO HANDLE NEW PROFILE PICTURE
+    const handleNewProfile = (e)=>{
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("profile", e.target.files[0])
+        axios.put(`http://localhost:5000/api/clubs/profile/picture/${urID}`, formData, {
+            headers : {
+                "token" : `Bearer ${sessionStorage.getItem("token")}`
+            }
+        }).then(res=>{
+            window.location.reload();
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
 
     return (
         <div className='wrap-outer'>
@@ -67,7 +86,10 @@ const ProfilePage = ({current})=>{
                     <h1>ALL ABOUT {profData.name ? profData.name:profData.userID}</h1>
                     <div className='user-profile-image-div'>
                         <img className='user-profile-image' 
-                            src={profData.profile?profData.profile:`${PF}unknown.png`} alt='username'></img>
+                            src={profData.profile? `${BF}${profData.profile}`:`${PF}unknown.png`} 
+                            alt={profData.name}></img>
+                        {current.userID===urID && <label htmlFor='profile' className='updateProfileLabel'>UPLOAD</label>}
+                        {current.userID===urID && <input name="profile" type='file' className='updateProfileInput' onChange={handleNewProfile}/>}
                     </div>
                 </div>
 
@@ -81,9 +103,9 @@ const ProfilePage = ({current})=>{
 
                 <div className="horizontal-group">
                     <div className="form-group left">
-                        <label htmlFor="class" className="label-title">CLASS</label>
-                        <input type="text" id="class" className="form-input" placeholder="Enter your class"
-                            defaultValue={profData?.class}/>
+                        <label htmlFor="lead" className="label-title">LEAD</label>
+                        <input type="text" id="lead" className="form-input" placeholder="Enter id for lead"
+                            defaultValue={profData?.lead}/>
                     </div>
 
                     <div className="form-group right">
@@ -100,23 +122,32 @@ const ProfilePage = ({current})=>{
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="hostel" className="label-title">HOSTEL</label>
-                    <input type="text" id="hostel" className="form-input" placeholder="Enter your hostel"
-                        defaultValue={profData?.hostel}/>
+                    <label htmlFor="alternate" className="label-title">ALTERNATE CONTACT</label>
+                    <input type="tel" id="alternate" className="form-input" placeholder="Enter your alternate mobile No."
+                        defaultValue={profData?.alternate_Contact}/>
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="dob" className="label-title">DATE OF BIRTH</label>
-                    <input type="date" id="dob" className="form-input" placeholder="Enter your DOB"
-                        defaultValue={profData?.dob}/>
+                    <label htmlFor="faculty" className="label-title">FACULTY</label>
+                    <input type="text" id="faculty" className="form-input" placeholder="Enter college faculty name"
+                        defaultValue={profData?.faculty}/>
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="objective" className="label-title">OBJECTIVE</label>
+                    <textarea   type="date" id="objective" 
+                                className="form-input" 
+                                placeholder="Enter club objective"
+                                style={{height:'80px'}}
+                                defaultValue={profData?.objective}/>
                 </div>
 
                 </div>
 
                 <div className="form-footer">
-                    <button type='submit' className='diff-btn' onClick={(e)=>test}>SAVE CHANGES</button>
+                    {current.userID===urID && <button type='submit' className='diff-btn'>SAVE CHANGES</button>}
                     <span id='message'></span>
-                    <button type="button" className="btn" onClick={handleClose}>CANCEL</button>
+                    <button type="button" className="profile-cancel-btn" onClick={handleClose}>CANCEL</button>
                 </div>
 
             </form>

@@ -21,6 +21,7 @@ import {
 import AdminAddUser from './Pages/AdminAddUser/adminAddUser';
 import MemberPage from './Pages/memberPage/membersPage';
 import SearchPeople from './Pages/searchBars/searchPeople'
+import ClubProfile from './Pages/profilePage/clubProfile'
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -103,6 +104,10 @@ function App() {
           {/*-----------------------ROUTE TO STUDENT PROFILE PAGE-----------------------------*/}
           <Route path='/stud/profile/:id' 
             element={<StudentProfilePage current={payload}/>}/>
+
+
+          {/*-----------------------ROUTE TO STUDENT PROFILE PAGE-----------------------------*/}
+          <Route path='/clubs/profile/:id' element={<ClubProfile current={payload}/>}/>
 
 
           {/*-----------------------ROUTE TO CALENDAR PAGE-----------------------------*/}

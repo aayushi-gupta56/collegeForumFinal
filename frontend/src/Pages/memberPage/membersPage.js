@@ -11,6 +11,7 @@ const MemberPage = ({current})=>{
     const [members, setMembers] = useState([])
     const path = window.location.pathname.split('/')
     const club = path[path.length-2]
+    const [deleted, setDeleted] = useState(false);
 
     useEffect(()=>{
 
@@ -30,6 +31,26 @@ const MemberPage = ({current})=>{
             window.location = `/admin/${current.userID}`
         else
             window.location = `/student/${current.userID}`
+    }
+
+    const handleDelete = (element)=>{
+        axios.delete(`http://localhost:5000/api/clubs/members/${club}/${element.userID}`,{
+            headers:{
+                "token" : `Bearer ${sessionStorage.getItem("token")}`
+            }
+        }).then(res=>{
+            setDeleted(true)
+            setTimeout(()=>{
+                setDeleted(false)
+            }, 4000)
+            window.location.reload(false)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const handleView = (element)=>{
+        window.location = `/stud/profile/${element.userID}`
     }
 
     const handleSubmit = (e)=>{
@@ -66,6 +87,7 @@ const MemberPage = ({current})=>{
         <div className='memberPage'>
             <Header/>
             <div className='memberList'>
+                {deleted && <p className='memberDeleted'>MEMBER DELETED SUCCESSFULLY..!</p>}
                 <button className='dashboard-btn-members' onClick={handleBack}>DASHBOARD</button>
                 {current.userID===club && <div className='singleMember'>
                     <div className='memberImgDiv'>
@@ -80,7 +102,7 @@ const MemberPage = ({current})=>{
                 </div>}
                 {members.map((element)=>{
                     return(
-                        <div className='singleMember'>
+                        <div key={element.userID} className='singleMember'>
                             <div className='memberImgDiv'>
                                 <img src={element.profile ? `${BF}${element.profile}` : `${PF}unknown.png`} className='memberImg'/>
                             </div>
@@ -90,11 +112,11 @@ const MemberPage = ({current})=>{
                                 <p className='aboutPOS'>{element.position}</p>
                             </div>
                             <div className='memberLinks'>
-                                {current.userID===club && <div className='deleteLink'>
+                                {current.userID===club && <div className='deleteLink' onClick={()=>handleDelete(element)}>
                                     <MdOutlineDelete/>
                                     <p>Delete</p>
                                 </div>}
-                                <div className={current.userID===club ? 'viewLink' : 'viewLink centerLink'}>
+                                <div className={current.userID===club ? 'viewLink' : 'viewLink centerLink'} onClick={()=>handleView(element)}>
                                     <AiOutlineEye/>
                                     <p>View</p>
                                 </div>   

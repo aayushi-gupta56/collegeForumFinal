@@ -118,7 +118,7 @@ route.get('/search', verifyToken, async(req, res)=>{
                 resolve(result)
         }))
 
-       const ans = Object.assign(clubs, stud)
+       const ans = stud.concat(clubs)
 
         ans.forEach(object => {
             delete object['password'];

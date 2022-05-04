@@ -29,7 +29,7 @@ const upload = multer({
 //CREATE POST
 route.post('/:id', upload.single("photo"), verifyTokenAndAuth, async(req, res)=>{
     const userID = req.params.id;
-    const photo = req.file.filename;
+    const photo = req.file ? req.file.filename : null;
     try{
 
         const stmt = "SELECT userID, isAdmin from users WHERE (userID=? AND isAdmin=?)"

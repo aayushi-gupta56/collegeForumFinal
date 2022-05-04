@@ -132,7 +132,6 @@ const Messenger = ({current})=>{
             <div className='messenger'>
                 <div className="chatMenu">
                     <div className="chatMenuWrapper">
-                        <input placeholder='Search for friends' className='chatMenuInput'/>
                         {conversations.map((c, index)=>{
                             return <div key={index} onClick={()=>setCurrentChat(c)}>
                                 <Conversation conversation={c} currentUser={current}/>

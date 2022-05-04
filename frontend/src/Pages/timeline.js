@@ -20,7 +20,7 @@ const Timeline = ({curUser})=>{
             }
         }).then((res)=>{
 
-            if(res.isClub===1){
+            if(res.data.isClub===1){
                 axios.get(`http://localhost:5000/api/clubs/profile/${getInfoAbout}`, {
                     headers:{
                         "token" : `Bearer ${sessionStorage.getItem("token")}`
@@ -30,7 +30,7 @@ const Timeline = ({curUser})=>{
                 }).catch(err=>{
                     console.log(err);
                 })
-            }else if(res.isAdmin!==1){
+            }else if(res.data.isAdmin!==1){
 
                     axios.get(`http://localhost:5000/api/stud/profile/${getInfoAbout}`, {
                         headers:{

@@ -26,6 +26,8 @@ const ProfilePage = ({current})=>{
     const handleClose = ()=>{
         if(current.isAdmin===1)
             window.location = '/admin/find'
+        else if(current.isClub===1)
+            window.location = `/club/${current.userID}/members`
         else
             window.location = `/student/${current.userID}`
     }

@@ -168,3 +168,16 @@
     font-size: 14px;
     color: red;
 }
+
+.memberDeleted{
+    position: absolute;
+    top: 17px;
+    left: 580px;
+    background-color: white;
+    color: #2f4ad0;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 2px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
